@@ -54,14 +54,14 @@ export const getENSorAdress = async (adress) => {
     ens = await provider.lookupAddress(adress);
   } catch (e) {
     // network might not support ENS.
-    console.warn(e);
+    console.warn("Network doesn't support ENS.");
   } finally {
     return ens || adress;
   }
 };
 
 const setEvents = (web3provider) => {
-  web3provider.on("chainChanged", (network) => {onNetworkChange.set(network), checkNetwork(2)});
+  web3provider.on("chainChanged", (network) => {onNetworkChange.set(network), checkNetwork(DEPLOYED_NETWORK.chainId)});
   web3provider.on("accountsChanged", (accs) => onAccountChanged.set(accs));
   web3provider.on("disconnect", (_) => onWalletConnected.set(false));
 };
