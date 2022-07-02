@@ -1,9 +1,5 @@
-let contractMeta;
-let artifact;
-
-import c from "../contractMeta.json";
-
-console.log(c);
+import contractMeta from "../contractMeta.json";
+import artifact from `../../artifacts/contracts/${contractMeta.name}.sol/${contractMeta.name}.json`;
 
 const { abi } = artifact;
 const NETWORKS = {
