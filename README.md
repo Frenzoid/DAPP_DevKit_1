@@ -36,13 +36,9 @@ Check out how thats used on `hardhat.config.js` and `./scripts/deploy.js`.
     - `npm run node` and in another terminal `npm run deploy-local`.
 
 ##### Frontend.
-4. Lets go to our frontend, check `./pages/index.js` for some sample code.
+4. Lets go to our frontend, check `./App.svelte` and `./components/Greeter.svelte` for some sample code.
 
-5.  You'll notice that you'll be able to access the `CONTRACT_ABI, CONTRACT_ADDRESS, DEPLOYED_NETWORK, DEPLOYER_ADDRESS` from `constants.js`, theres no need to change these values, since each time you deploy your contract with hardhat, `backend/scripts/deploy.js `will update these variables to the latest deployed contract, and you'll have direct access to them from these variables in your `config/constanst.js` file.
-
-  - There are 2 components, `index.js` and `greeter.js`, in this case, `index.js` manages all web3modal processes and signer, provider and contract instance creation. `greeter.js` is just a component that renders a body, and interacts with the deployed contract.
-
-  - You can use those 2 files as an example on how to interact with the ethereum ecosystem on the frontend ( providers, signers, contract, network and acc changes, etc.. ).
+5.  You'll notice that you'll be able to access the `CONTRACT_ABI, CONTRACT_ADDRESS, DEPLOYED_NETWORK, DEPLOYER_ADDRESS` from `constants.js`, theres no need to change these values, since each time you deploy your contract with hardhat, `backend/scripts/deploy.js `will update these variables to the latest deployed contract, and you'll have direct access to them from these variables in your `config/constanst/contract.js` file.
 
 6. Run `npm run dev` to start the Vite dev server, try and tinker with the app!
 
