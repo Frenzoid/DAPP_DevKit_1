@@ -1,5 +1,14 @@
 import contractMeta from "../contractMeta.json";
-const { abi } = await import(/* @vite-ignore */ `../../artifacts/contracts/${contractMeta.name}.sol/${contractMeta.name}.json`);
+import { onArtifactImported } from "../../stores/importStore";
+
+export let CONTRACT_ABI;
+export const CONTRACT_ADDRESS = contractMeta.address;
+export const DEPLOYER_ADDRESS = contractMeta.deployer;
+
+import(`../../artifacts/contracts/${contractMeta.name}.sol/${contractMeta.name}.json`).then(artifact => {
+    CONTRACT_ABI = artifact.abi;
+    onArtifactImported.set(true);
+});
 
 const NETWORKS = {
     localhost: {
@@ -34,7 +43,4 @@ const NETWORKS = {
     },
 }
 
-export const CONTRACT_ABI = abi;
-export const CONTRACT_ADDRESS = contractMeta.address;
-export const DEPLOYER_ADDRESS = contractMeta.deployer;
 export const DEPLOYED_NETWORK = NETWORKS[contractMeta.network];
