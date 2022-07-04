@@ -20,7 +20,7 @@
 
     {#if !$onWalletConnected}
       <div class="w-full flex justify-center items-center mt-2">
-        <Button func={connect} text="Connect to Wallet" />
+        <Button func={connect} bgcolor="green" text="Connect to Wallet" />
       </div>
     {/if}
 
