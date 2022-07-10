@@ -8,6 +8,7 @@
         "clean": "hardaht clean",
         "compile": "hardhat clean && hardhat compile",
         "deploy-local": "hardhat clean && hardhat compile && hardhat run ./scripts/deploy.js --network localhost --show-stack-traces",
+        "deploy-rinkeby": "hardhat clean && hardhat compile && hardhat run ./scripts/deploy.js --network rinkeby --show-stack-traces",
         "deploy-mumbai": "hardhat clean && hardhat compile && hardhat run ./scripts/deploy.js --network mumbai --show-stack-traces",
         "deploy-goerli": "hardhat clean && hardhat compile && hardhat run ./scripts/deploy.js --network goerli --show-stack-traces",
         "test": "hardhat test"

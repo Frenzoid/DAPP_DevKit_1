@@ -43,6 +43,10 @@ module.exports = {
       url: process.env.GOERLI_RPC_URL,
       accounts: [process.env.DEPLOYER_ACC_PRIV_KEY],
     },
+    rinkeby: {
+      url: process.env.RINKEBY_RPC_URL,
+      accounts: [process.env.DEPLOYER_ACC_PRIV_KEY],
+    },
   },
   etherscan: {
     apiKey: {

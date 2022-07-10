@@ -26,7 +26,7 @@ When you deploy a contract, the contract will be verified, the artifacts, abis a
 <br>
 
 ##### Backend.
-1. Go at `/backend/.env_examples` and fill out the gaps.
+1. Go at `/backend/.env_examples` and fill out the gaps, after that rename it to `/backend/.env`.
 Check out how thats used on `hardhat.config.js` and `./scripts/deploy.js`.
 
 
@@ -42,7 +42,7 @@ Check out how thats used on `hardhat.config.js` and `./scripts/deploy.js`.
 
 6. Run `npm run dev` to start the Vite dev server, try and tinker with the app!
 
-7. Once your frontend is ready, lets deploy it to the internet! Run `npm run deploy`, wait for the build to finish, think of a cool domain name, input it when surge asks you ( mydomain.surger.sh for example ), and tadaaa :D, your dapp is on the internet!!.
+7. Once your frontend is ready, lets deploy it to the internet! Run `npm run deploy`, wait for the build to finish, think of a cool domain name, input it when surge asks you ( mydomain.surger.sh for example ), and tadaaa :D, your dapp is on the internet!! Here is my example: https://sveltegreeter.surge.sh.
 
 #### Commands ( node scripts ):
 - backend:
