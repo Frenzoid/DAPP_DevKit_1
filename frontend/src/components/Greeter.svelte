@@ -31,17 +31,12 @@
 
   const getGreetEvents = async () => {
     const eventFilter = contract.filters.Greet();
-    greeterEvents = await contract.queryFilter(eventFilter);
+    const events = await contract.queryFilter(eventFilter);
 
-    console.log(greeterEvents);
+    greeterEvents = events.map((event) => event.args).reverse();
 
     contract.on("Greet", async (who, greet) => {
-      greeterEvents.unshift({
-        who,
-        greet,
-      });
-
-      console.log(greeterEvents);
+      greeterEvents = [{ who, greet }, ...greeterEvents];
     });
   };
 
