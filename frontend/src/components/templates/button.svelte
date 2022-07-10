@@ -10,7 +10,7 @@
   on:click={func}
   {disabled}
   type="button"
-  class="text-white mt-2 bg-{bgcolor}-600 hover:bg-{bgcolor}-800 focus:ring-4 focus:ring-{bgcolor}-300 rounded-md px-5 py-2 text-center inline-flex items-center"
+  class="text-white text-center mt-2 bg-{bgcolor}-600 hover:bg-{bgcolor}-800 focus:ring-4 focus:ring-{bgcolor}-300 rounded-md px-5 py-2 inline-flex items-center"
 >
   {#if loading}
     <svg

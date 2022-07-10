@@ -47,10 +47,10 @@
 
 <h4 class="text-4xl text-center">{greeter}</h4>
 
-<div class="flex flex-row content-center">
+<div class="mt-10 flex">
   <input
     bind:value={newGreeter}
-    class="w-10/12 rounded-md p-2 border-2 border-gray-200 mt-2"
+    class="w-10/12 mr-auto rounded-md border-2 border-gray-200 mt-2"
     type="text"
   />
   {#if $onTransaction}
