@@ -12,34 +12,10 @@ import(`../../artifacts/contracts/${contractMeta.name}.sol/${contractMeta.name}.
 
 const NETWORKS = {
     localhost: {
-        name: "localhost",
+        name: "https://8545-halftimehar-dappdevkit1-dwa7tqildce.ws-us75.gitpod.io",
         color: "#666666",
         symbok: "ETH",
         chainId: 31337,
-    },
-    rinkeby: {
-        name: "rinkeby",
-        color: "#e0d068",
-        symbol: "RIN",
-        chainId: 4,
-    },
-    ropsten: {
-        name: "ropsten",
-        color: "#F60D09",
-        symbol: "ROP",
-        chainId: 3,
-    },
-    mumbai: {
-        name: "mumbai",
-        color: "#92D9FA",
-        symbol: "MATIC",
-        chainId: 80001,
-    },
-    goerli: {
-        name: "goerli",
-        color: "#00D0D0",
-        symbol: "GOR",
-        chainId: 420,
     },
 }
 

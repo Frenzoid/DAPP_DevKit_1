@@ -35,9 +35,12 @@
 
     greeterEvents = events.map((event) => event.args).reverse();
 
-    contract.on("Greet", async (who, greet) => {
-      greeterEvents = [{ who, greet }, ...greeterEvents];
-    });
+    contract.on(
+      "Greet",
+      async (/** @type {any} */ who, /** @type {any} */ greet) => {
+        greeterEvents = [{ who, greet }, ...greeterEvents];
+      }
+    );
   };
 
   // Init.
