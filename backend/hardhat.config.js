@@ -35,24 +35,9 @@ module.exports = {
     localhost: {
       url: "http://localhost:8545",
     },
-    mumbai: {
-      url: process.env.MUMBAI_RPC_URL,
-      accounts: [process.env.DEPLOYER_ACC_PRIV_KEY],
-    },
     goerli: {
       url: process.env.GOERLI_RPC_URL,
-      accounts: [process.env.DEPLOYER_ACC_PRIV_KEY],
-    },
-    rinkeby: {
-      url: process.env.RINKEBY_RPC_URL,
-      accounts: [process.env.DEPLOYER_ACC_PRIV_KEY],
-    },
-  },
-  etherscan: {
-    apiKey: {
-      rinkeby: process.env.ETHERSCAN_API_KEY,
-      ropsten: process.env.ETHERSCAN_API_KEY,
-      polygonMumbai: process.env.POLYSCAN_API_KEY,
+      account: [process.env.DEPLOYER_ACC_PRIV_KEY],
     }
   },
 };
