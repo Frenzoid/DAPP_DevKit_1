@@ -1,0 +1,20 @@
+{
+    "name": "Dulligan 5",
+    "description": "Worth 5 ETH for unknown product",
+    "image": "https://ipfs.io/ipfs/QmbW44b66ZfDtLoh4xU67kpxReGrBL73nFope9JdtguRVi",
+    "id": "3",
+    "attributes": [
+        {
+            "trait_type": "Dulligan Fund Amount Needed",
+            "value": 5
+        },
+        {
+            "trait_type": "Type of Dulligan",
+            "value": "Funded for 5 ETH"
+        },
+        {
+            "trait_type": "Funded at",
+            "value": "99-cent"
+        }
+    ]
+}

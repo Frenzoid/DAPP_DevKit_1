@@ -1,0 +1,20 @@
+{
+    "name": "Dulligan 20",
+    "description": "Worth 20 ETH for unknown product",
+    "image": "https://ipfs.io/ipfs/QmbW44b66ZfDtLoh4xU67kpxReGrBL73nFope9JdtguRVi",
+    "id": "1",
+    "attributes": [
+        {
+            "trait_type": "Dulligan Fund Amount Needed",
+            "value": 20
+        },
+        {
+            "trait_type": "Type of Dulligan",
+            "value": "Funded for 20 ETH"
+        },
+        {
+            "trait_type": "Funded at",
+            "value": "Staples"
+        }
+    ]
+}
