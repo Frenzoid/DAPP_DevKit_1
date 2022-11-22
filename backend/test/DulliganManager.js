@@ -6,59 +6,65 @@ const tokens = (n) => {
 }
 
 describe('DulliganManager', () => {
-    let dulliger, dulligie
-    let dulligan
-    
-    it('saves the addresses', async () => {
+    let dulliger, dulligie, vendor
+    let dulligan, dulliganManager
 
+    beforeEach( async () => {
         // Setup accounts
         [dulliger, dulligie, vendor] = await ethers.getSigners()
 
-        // Deploy Dulligan
+        // Deply Dulligan
         const Dulligan = await ethers.getContractFactory('Dulligan')
-        const dulligan = await Dulligan.deploy()
-        await Dulligan.deployed()
+        dulligan = await Dulligan.deploy()
 
-        console.log(`Deployed Dulligan Contract at: ${dulligan.address}`)
-        console.log(`Minting 3 dulligans...\n`)
+        // Mint 1 Dulligan
+        let transaction = await dulligan.connect(dulliger).mint("https://ipfs.io/ipfs/QmfKUeG2pE4fcA6dLwzqbUac19PN5uLC7ziyHFAnRAA8j6")
+        await transaction.wait()
 
-        //Mint
 
-        // Add 3 NFT's using this 
-        for (let i = 0; i < 3; i++) {
-            const transaction = await Dulligan.connect(dulliger).mint(`https://ipfs.io/ipfs/QmX2dSzF4gySyXKHyLhJ8fccXZCcpkPZaKXvxjcaP2T5dW/${i + 1}.json`)
-            await transaction.wait()
-        }
-
-        // Deploy DulliganManager
         const DulliganManager = await ethers.getContractFactory('DulliganManager')
-        const dulliganManager = await DulliganManager.deploy(
+        dulliganManager = await DulliganManager.deploy(
             dulligan.address,
             dulliger.address,
             dulligie.address,
             vendor.address
         )
-        await dulliganManager.deployed()
 
-        console.log(`Deployed DulliganManager Contract at: ${dulliganManager.address}`)
-        console.log(`Listing 3 dulligans...\n`)
-
-        for (let i = 0; i < 3; i++) {
-        // Approve dulligans...
-        let transaction = await dulligan.connect(dulliger).approve(dulliganManager.address, i + 1)
+        // Approve dulligab
+        transaction = await dulligan.connect(dulliger).approve(dulliganManager.address, 1)
         await transaction.wait()
+    })
 
-        transaction = await dulliganManager.connect(dulliger).list(2, buyer.address, tokens(10), tokens(5))
-        await transaction.wait()
+    describe('Deployment', () => {
 
-        transaction = await dulliganManager.connect(dulliger).list(3, buyer.address, tokens(5), tokens(2))
-        await transaction.wait()
+        it('Returns NFT address', async () => {
+            const result = await dulliganManager.nftAddress()
+            expect(result).to.be.equal(dulligan.address)
+        })
 
-        console.log(`Finished.`)
-}
-// We recommend this pattern to be able to use async/await everywhere
-// and properly handle errors.
-main().catch((error) => {
-  console.error(error);
-  process.exitCode = 1;
-});
+        it('Returns dulliger address', async () => {
+            const result = await dulliganManager.dulliger()
+            expect(result).to.be.equal(dulliger.address)
+        })
+
+        it('Returns dulligie address', async () => {
+            const result = await dulliganManager.dulligie()
+            expect(result).to.be.equal(dulligie.address)
+        })
+
+        it('Returns vendor address', async () => {
+            const result = await dulliganManager.vendor()
+            expect(result).to.be.equal(vendor.address)
+        })
+
+    })
+
+    describe('Listing', () => {
+
+        it('Updates ownership', async () => {
+            //ownerOf(1) means NFT # 1
+            expect(await dulligan.ownerOf(1)).to.be.equal(dulliganManager.address)
+        })
+    })
+
+})

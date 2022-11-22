@@ -11,14 +11,20 @@ interface IERC721 {
 
 contract DulliganManager {
     address public nftAddress;
-    address payable public vendor;
     address public dulliger;
     address public dulligie;
+    address payable public vendor;
+
 
     constructor(
         address _nftAddress,
-        address payable _vendor,
         address _dulliger,
-        address _dulligie
-    ) {}
+        address _dulligie,
+        address payable _vendor
+    ) {
+        nftAddress = _nftAddress;
+        dulliger = _dulliger;
+        dulligie = _dulligie;
+        vendor = _vendor;
+    }
 }
