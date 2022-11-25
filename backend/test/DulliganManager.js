@@ -18,7 +18,7 @@ describe('DulliganManager', () => {
         dulligan = await Dulligan.deploy()
 
         // Mint 1 Dulligan
-        let transaction = await dulligan.connect(dulliger).mint("https://ipfs.io/ipfs/QmfKUeG2pE4fcA6dLwzqbUac19PN5uLC7ziyHFAnRAA8j6")
+        let transaction = await dulligan.connect(dulliger).mint("https://ipfs.io/ipfs/QmddjmkFnrdrQw7oVmkC8w7WMMFP4YoxCD21BmwC15HJvt")
         await transaction.wait()
 
 
@@ -30,9 +30,14 @@ describe('DulliganManager', () => {
             vendor.address
         )
 
-        // Approve dulligab
+        // Approve dulligan
         transaction = await dulligan.connect(dulliger).approve(dulliganManager.address, 1)
         await transaction.wait()
+
+        // List dulligan
+        transaction = await dulliganManager.connect(dulliger).list(1, tokens(10), vendor.address)
+        await transaction.wait()
+
     })
 
     describe('Deployment', () => {
@@ -60,11 +65,26 @@ describe('DulliganManager', () => {
     })
 
     describe('Listing', () => {
+        it('Updates as listed', async () => {
+             const result = await dulliganManager.isListed(1)
+            expect(result).to.be.equal(true)
+        })
+
+        it('Returns purchase price', async () => {
+            const result = await dulliganManager.purchasePrice(1)
+            expect(result).to.be.equal(tokens(10))
+        })
+
+        it('Returns buyer as the vendor to provide the product or service', async () => {
+            const result = await dulliganManager.buyer(1)
+            expect(result).to.be.equal(vendor.address)
+        })
 
         it('Updates ownership', async () => {
             //ownerOf(1) means NFT # 1
             expect(await dulligan.ownerOf(1)).to.be.equal(dulliganManager.address)
         })
+
     })
 
 })

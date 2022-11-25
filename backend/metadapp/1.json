@@ -1,16 +1,16 @@
 {
-    "name": "Dulligan 20",
-    "description": "Worth 20 ETH for unknown product",
+    "name": "Dulligan 30",
+    "description": "Worth 30 ETH for unknown product",
     "image": "https://ipfs.io/ipfs/QmbW44b66ZfDtLoh4xU67kpxReGrBL73nFope9JdtguRVi",
     "id": "1",
     "attributes": [
         {
-            "trait_type": "Dulligan Fund Amount Needed",
-            "value": 20
+            "trait_type": "Purchase Price",
+            "value": 30
         },
         {
             "trait_type": "Type of Dulligan",
-            "value": "Funded for 20 ETH"
+            "value": "Funded for 30 ETH"
         },
         {
             "trait_type": "Funded at",
