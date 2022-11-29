@@ -87,4 +87,17 @@ describe('DulliganManager', () => {
 
     })
 
+    describe('Deposits', () => {
+        beforeEach(async () => {
+            const transaction = await dulliganManager.connect(dulliger).depositEarnest(1, { value: tokens(10) })
+            await transaction.wait()
+        })
+
+        it('Updates contract balance', async () => {
+            const result = await dulliganManager.getBalance()
+            expect(result).to.be.equal(tokens(10))
+        })
+
+    })
+
 })

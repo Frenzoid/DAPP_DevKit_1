@@ -7,17 +7,23 @@ interface IERC721 {
 
 contract DulliganManager {
     address public nftAddress;
-    address public dulliger;
+    address payable public dulliger;
     address public dulligie;
     address payable public vendor;
+
+    modifier onlyDulliger() {
+        require(msg.sender == dulliger, "Only dulliger can call this method");
+        _;
+    }
 
     mapping(uint256 => bool) public isListed;
     mapping(uint256 => uint256) public purchasePrice;
     mapping(uint256 => address) public buyer;
+    mapping(uint256 => address) public creator;
 
     constructor(
         address _nftAddress,
-        address _dulliger,
+        address payable _dulliger,
         address _dulligie,
         address payable _vendor
     ) {
@@ -31,12 +37,23 @@ contract DulliganManager {
         uint256 _nftID,
         uint256 _purchasePrice,
         address _buyer
-    ) public {
+    ) public payable onlyDulliger {
         // Transfer NFT from seller to this contract
         IERC721(nftAddress).transferFrom(msg.sender, address(this), _nftID);
 
         isListed[_nftID] = true;
         purchasePrice[_nftID] = _purchasePrice;
         buyer[_nftID] = _buyer;
+    }
+
+    // Put Under Contract (only dulliger - payable dulliganManager)
+    function depositEarnest(uint256 _nftID) public payable onlyDulliger {
+        require(msg.value >= purchasePrice[_nftID]);
+    }
+
+    receive() external payable {}
+
+    function getBalance() public view returns (uint256) {
+        return address(this).balance;
     }
 }
