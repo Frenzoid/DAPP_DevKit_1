@@ -16,10 +16,15 @@ contract DulliganManager {
         _;
     }
 
+    modifier onlyDulligie() {
+        require(msg.sender == dulligie, "Only dulligie can call this method");
+        _;
+    }
+
     mapping(uint256 => bool) public isListed;
     mapping(uint256 => uint256) public purchasePrice;
     mapping(uint256 => address) public buyer;
-    mapping(uint256 => address) public creator;
+    mapping(uint256 => bool) public dulligieSelected;
 
     constructor(
         address _nftAddress,
@@ -49,6 +54,14 @@ contract DulliganManager {
     // Put Under Contract (only dulliger - payable dulliganManager)
     function depositEarnest(uint256 _nftID) public payable onlyDulliger {
         require(msg.value >= purchasePrice[_nftID]);
+    }
+
+    // Update Selection Status (only dulligie)
+    function updateSelectionStatus(
+        uint256 _nftID,
+        bool _selected
+    ) public onlyDulligie {
+        dulligieSelected[_nftID] = _selected;
     }
 
     receive() external payable {}

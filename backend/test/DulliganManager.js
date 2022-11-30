@@ -98,6 +98,17 @@ describe('DulliganManager', () => {
             expect(result).to.be.equal(tokens(10))
         })
 
+    describe('Picked', () => {
+        beforeEach(async () => {
+            const transaction = await dulliganManager.connect(dulligie).updateSelectionStatus(1, true)
+            await transaction.wait()
+        })
+
+        it('Updates selected status', async () => {
+            const result = await dulliganManager.dulligieSelected(1)
+            expect(result).to.be.equal(true)
+        })
+    })
     })
 
 })
