@@ -23,8 +23,10 @@ contract DulliganManager {
 
     mapping(uint256 => bool) public isListed;
     mapping(uint256 => uint256) public purchasePrice;
+    // the buyer is kina place holder shoul get filled with dulligie who gets for free
     mapping(uint256 => address) public buyer;
     mapping(uint256 => bool) public dulligieSelected;
+    mapping(uint256 => mapping(address => bool)) public approval;
 
     constructor(
         address _nftAddress,
@@ -68,5 +70,30 @@ contract DulliganManager {
 
     function getBalance() public view returns (uint256) {
         return address(this).balance;
+    }
+
+    // Approve Sale
+    function approveSale(uint256 _nftID) public {
+        approval[_nftID][msg.sender] = true;
+    }
+
+    // Finalize Sale
+    // -> Require selection status (add more items here, like transfer dulligan)
+    // -> Require funds to be correct amount
+    // -> Transfer NFT to dulligie
+    // -> Transfer Funds to Vendor Selected
+    function finalizeSale(uint256 _nftID) public {
+        require(dulligieSelected[_nftID]);
+        require(approval[_nftID][buyer[_nftID]]);
+        require(address(this).balance >= purchasePrice[_nftID]);
+
+        isListed[_nftID] = false;
+
+        (bool success, ) = payable(vendor).call{value: address(this).balance}(
+            ""
+        );
+        require(success);
+
+        IERC721(nftAddress).transferFrom(address(this), buyer[_nftID], _nftID);
     }
 }

@@ -6,7 +6,7 @@ const tokens = (n) => {
 }
 
 describe('DulliganManager', () => {
-    let dulliger, dulligie, vendor
+    let  dulliger, vendor, dulligie
     let dulligan, dulliganManager
 
     beforeEach( async () => {
@@ -35,7 +35,7 @@ describe('DulliganManager', () => {
         await transaction.wait()
 
         // List dulligan
-        transaction = await dulliganManager.connect(dulliger).list(1, tokens(10), vendor.address)
+        transaction = await dulliganManager.connect(dulliger).list(1, tokens(10), dulligie.address)
         await transaction.wait()
 
     })
@@ -75,9 +75,9 @@ describe('DulliganManager', () => {
             expect(result).to.be.equal(tokens(10))
         })
 
-        it('Returns buyer as the vendor to provide the product or service', async () => {
+        it('Returns buyer as the dulligie as target', async () => {
             const result = await dulliganManager.buyer(1)
-            expect(result).to.be.equal(vendor.address)
+            expect(result).to.be.equal(dulligie.address)
         })
 
         it('Updates ownership', async () => {
@@ -98,7 +98,7 @@ describe('DulliganManager', () => {
             expect(result).to.be.equal(tokens(10))
         })
 
-    describe('Picked', () => {
+    describe('Selected by dulligie', () => {
         beforeEach(async () => {
             const transaction = await dulliganManager.connect(dulligie).updateSelectionStatus(1, true)
             await transaction.wait()
@@ -108,6 +108,47 @@ describe('DulliganManager', () => {
             const result = await dulliganManager.dulligieSelected(1)
             expect(result).to.be.equal(true)
         })
+
+    describe('Approval', () => {
+        beforeEach(async () => {
+            let transaction = await dulliganManager.connect(dulligie).approveSale(1)
+            await transaction.wait()
+
+            transaction = await dulliganManager.connect(dulliger).approveSale(1)
+            await transaction.wait()
+
+            transaction = await dulliganManager.connect(vendor).approveSale(1)
+            await transaction.wait()
+        })
+
+        it('Updates approval status', async () => {
+            expect(await dulliganManager.approval(1, dulligie.address)).to.be.equal(true)
+            expect(await dulliganManager.approval(1, dulliger.address)).to.be.equal(true)
+            expect(await dulliganManager.approval(1, vendor.address)).to.be.equal(true)
+        })
+    })
+
+        describe('Sale', () => {
+         beforeEach(async () => {
+            let transaction = await dulliganManager.connect(dulliger).depositEarnest(1, { value: tokens(10) })
+            await transaction.wait()
+
+            transaction = await dulliganManager.connect(dulligie).updateSelectionStatus(1, true)
+            await transaction.wait()
+
+            transaction = await dulliganManager.connect(this).finalizeSale(1)
+            await transaction.wait()
+        })
+
+        it('Updates ownership of NFT', async () => {
+            expect(await dulligian.ownerOf(1)).to.be.equal(dulligie.address)
+        })
+
+        it('Updates balance', async () => {
+            expect(await dulligianManager.getBalance()).to.be.equal(0)
+        })
+            
+    })
     })
     })
 
